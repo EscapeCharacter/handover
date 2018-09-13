@@ -1,3 +1,7 @@
+<form action="index.php">
+	<button>Back Home</button>
+</form>
+
 <?php
 
 function return_data(){
@@ -6,10 +10,18 @@ function return_data(){
 	$userISBN = preg_replace("/-/", "", $_POST['isbn_input']);
 	$fullURL = $baseURLbegin . $userISBN . $baseURLend;
 	$JSONraw = file_get_contents($fullURL);
-	$JSON = json_decode($JSONraw);
-	print "<pre>";
-	print_r($JSON);
-	print "</pre>";
+	$JSON = json_decode($JSONraw, true);
+	$resultsArray = $JSON['response']['docs'][0];
+	foreach($resultsArray AS $prop => $val){
+		if($prop == 'DAC_KEY' || $prop == 'TYPE' || $prop == 'EBK_ISBN' || $prop == 'ORDER_NO' || $prop == 'AUTHORS' || $prop == 'PUBLISHING_HOUSE_DESC' || $prop == 'TITLE_FULL'){
+				print "<pre>";
+				print_r('['. $prop . ']' . ' => ' . $val);
+				print "</pre>";
+		}
+	}
+	// print "<pre>";
+	// print_r($JSON);
+	// print "</pre>";
 }
 
 if (isset($_POST['submit'])) {
@@ -59,13 +71,14 @@ if(isset($_POST['submit2'])){
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>ISBN Info</title>
+	<style>
+		div {
+			width: 40%;
+		}
+	</style>
 </head>
 
 <body>
-
-<form action="index.php">
-	<button>Back Home</button>
-</form>
 
 <div>
 	<form enctype="multipart/form-data" name="myForm" action="index.php" method="POST">

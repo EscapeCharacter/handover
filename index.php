@@ -17,8 +17,8 @@
 		<form action="ISBNresults.php" method="POST" name="form2">
 			<fieldset>
 				<legend>Get ISBN Information</legend>
-				Get info about title: <input type="text" name="isbn_input">
-				<input type="submit" name="submit" value="ISBN Info">
+				Enter ISBN: <input type="text" name="isbn_input">
+				<input type="submit" name="submit" value="Go">
 			</fieldset>
 		</form>
 	</div>

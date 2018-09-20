@@ -12,10 +12,11 @@ function return_data(){
 	$JSONraw = file_get_contents($fullURL);
 	$JSON = json_decode($JSONraw, true);
 	$resultsArray = $JSON['response']['docs'][0];
-	foreach($resultsArray AS $prop => $val){
-		if($prop == 'DAC_KEY' || $prop == 'TYPE' || $prop == 'EBK_ISBN' || $prop == 'ORDER_NO' || $prop == 'AUTHORS' || $prop == 'PUBLISHING_HOUSE_DESC' || $prop == 'TITLE_FULL'){
+
+	foreach($resultsArray AS $k => $v){
+		if($k == 'DAC_KEY' || $k == 'TYPE' || $k == 'EBK_ISBN' || $k == 'ORDER_NO' || $k == 'AUTHORS' || $k == 'PUBLISHING_HOUSE_DESC' || $k == 'TITLE_FULL'){
 				print "<pre>";
-				print_r('['. $prop . ']' . ' => ' . $val);
+				print_r('['. $k . ']' . ' => ' . $v);
 				print "</pre>";
 		}
 	}
@@ -81,7 +82,7 @@ if(isset($_POST['submit2'])){
 <body>
 
 <div>
-	<form enctype="multipart/form-data" name="myForm" action="index.php" method="POST">
+	<form enctype="multipart/form-data" name="myForm" method="POST">
 		<fieldset>
 			<legend>Upload file</legend>
 			Select file to upload: <input type="file" name="fileToUpload">

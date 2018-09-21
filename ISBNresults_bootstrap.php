@@ -28,8 +28,8 @@ function handle_upload(){
 
     if($imageFileType == "xls" || $imageFileType == "xlsx" || $imageFileType == "csv"){
         $target_dir = "uploads/excel/";
-    } elseif($imageFileType == "doc" || $imageFileType == "docx"){
-        $target_dir = "uploads/word/";
+    } elseif($imageFileType == "doc" || $imageFileType == "docx" && strpos($target_file, 'handover') !== false){
+        $target_dir = "uploads/handover/";
     } else{
         $target_dir = "uploads/general_uploads/";
     }
